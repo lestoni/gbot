@@ -1,6 +1,6 @@
 const http  = require('http');
 const Koa   = require('koa');
-const route = require('koa-route');
+const router = require('koa-router')();
 const request = require('request');
 const debug   = require('debug')('bot');
 
@@ -11,8 +11,7 @@ const app = new Koa();
 const VERIFY_TOKEN = 'SUi5KOmh5/Qbi6RVoY1JoWdgCCUr';
 const PAGE_ACCESS_TOKEN = '';
 
-
-app.use(route.get('/webhook', function* verifyHook(next) {
+router.get('/webhook', function* verifyHook(next) {
   if(this.query['hub.mode'] === 'subscribe' &&
      this.query['hub.verify_token'] === VERIFY_TOKEN) {
     console.log('Validating Webhook');
@@ -20,13 +19,13 @@ app.use(route.get('/webhook', function* verifyHook(next) {
     this.body = this.query['hub.challenge'];
 
   } else {
-    this.status(403);
+    this.status = 403;
     this.body = 'Verification failed!';
   }
-}));
+});
 
 
-app.use(route.post('/webhook', function* receiveMessages(next) {
+router.post('/webhook', function* receiveMessages(next) {
   let body = this.request.body;
 
   if(body.object === 'page') {
@@ -46,7 +45,9 @@ app.use(route.post('/webhook', function* receiveMessages(next) {
     this.status = 200;
     this.body = '';
   }
-}));
+});
+
+app.use(router.routes());
 
 function receivedMessage(event) {
   let senderID = event.sender.id;
@@ -114,6 +115,7 @@ function callSendAPI(messageData) {
     }
   });
 }
+
 
 server = http.createServer(app.callback());
 
