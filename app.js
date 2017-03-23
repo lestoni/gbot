@@ -9,7 +9,7 @@ const PORT = process.env.PORT || 6500;
 const app = new Koa();
 
 const VERIFY_TOKEN = 'SUi5KOmh5/Qbi6RVoY1JoWdgCCUr';
-const PAGE_ACCESS_TOKEN = '';
+const PAGE_ACCESS_TOKEN = 'EAASfQK7TeUgBANw2dHkScmy5RZC1bKap0GTKLQ7sNC44khZBnPZCvmAFALyHRmHsTTauaaBMnZCxZA5RzmHoNTKCTdcwemqE3LUvibsvcZC3l4rkg6KRC4IimIGkDE4rFD3QHHD4jR0nlQWeUJ5qtoo9JwiZBWc2uEuxNUzoSjZB0gZDZD';
 
 router.get('/webhook', function* verifyHook(next) {
   if(this.query['hub.mode'] === 'subscribe' &&
