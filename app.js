@@ -3,6 +3,7 @@ const Koa   = require('koa');
 const router = require('koa-router')();
 const request = require('request');
 const debug   = require('debug')('bot');
+const bodyParser = require('koa-body');
 
 const PORT = process.env.PORT || 6500;
 
@@ -46,6 +47,8 @@ router.post('/webhook', function* receiveMessages(next) {
     this.body = '';
   }
 });
+
+app.use(bodyParser());
 
 app.use(router.routes());
 
