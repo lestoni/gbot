@@ -4,7 +4,7 @@ const route = require('koa-route');
 const request = require('request');
 const debug   = require('debug')('bot');
 
-const PORT = 6500;
+const PORT = process.env.PORT || 6500;
 
 const app = new Koa();
 
