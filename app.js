@@ -69,19 +69,55 @@ function receivedMessage(event) {
 
   if(messageText) {
     switch (messageText) {
-      case 'Editions':
-        sendEditionsMessage(senderID);
+      case 'Locations':
+        sendLocationsMessage(senderID);
       break;
 
-    default:
-      sendTextMessage(senderID, messageText);
+    //default:
+      //sendTextMessage(senderID, messageText);
     }
   } else if(messageAttachments) {
     sendTextMessage(senderID, "Message with attachment received");
   }
 }
 
-function sendEditionsMessage(recipientId, messageText) {
+function sendLocationsMessage(recipientId, messageText) {
+  var messageData = {
+    recipient: {
+      id: recipientId
+    },
+    message: {
+      attachment: {
+        type: "template",
+        payload: {
+          template_type: "generic",
+          elements: [{
+            title: "Addis Ababa",
+            subtitle: "Woreda 02, Sinan Building 2nd Floor, Bole Subcity, Addis Ababa, Ethiopia",
+            item_url: "http://gebeya.com/",
+            image_url: "https://media.licdn.com/mpr/mpr/shrink_200_200/AAEAAQAAAAAAAAftAAAAJDc1Njg1NmE3LTY0MDMtNGVmOS04YjM2LWIzYWRmZDgwMDU4NA.png",
+            buttons: [{
+              type: "web_url",
+              url: "https://gebeya.com",
+              title: "Go to site"
+            }],
+          }, {
+            title: "Nairobi",
+            subtitle: "Ground Floor, Riara Corporate Suites, Riara Road, Nairobi, Kenya",
+            item_url: "http://gebeya.com",
+            image_url: "https://media.licdn.com/mpr/mpr/shrink_200_200/AAEAAQAAAAAAAAftAAAAJDc1Njg1NmE3LTY0MDMtNGVmOS04YjM2LWIzYWRmZDgwMDU4NA.png",
+            buttons: [{
+              type: "web_url",
+              url: "https://gebeya.com",
+              title: "Go to site"
+            }]
+          }]
+        }
+      }
+    }
+  };
+
+  callSendAPI(messageData);
 }
 
 function sendTextMessage(recipientId, messageText) {
