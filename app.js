@@ -9,8 +9,8 @@ const PORT = process.env.PORT || 6500;
 
 const app = new Koa();
 
-const VERIFY_TOKEN = 'SUi5KOmh5/Qbi6RVoY1JoWdgCCUr';
-const PAGE_ACCESS_TOKEN = 'EAAKL81mDHbMBAOZCJt2KI2i5Ww7AAQ3u87iKPUOsDXXI7V2AYKShHDfQJBDSXxK0EcGgtIZBudWj3chBfOoZB0Wvv4KJQalMz8oi084yhwZCYXnYRDNi7YUZAcemLpTLO8ASiovw9J9vQNAHEceIzyXvy6NQrvljv61KpJ1DZBagZDZD';
+const VERIFY_TOKEN = '';
+const PAGE_ACCESS_TOKEN = '';
 
 router.get('/webhook', function* verifyHook(next) {
   if(this.query['hub.mode'] === 'subscribe' &&
